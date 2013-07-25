@@ -7,7 +7,7 @@ using System.Collections;
 namespace H31DHTMgr
 {
     /// <summary>
-    /// Torrent文件 
+    /// Torrent文件解析类 
     /// 2013-06-28
     /// </summary>
     public class TorrentFile

@@ -43,10 +43,11 @@ namespace H31DHTMgr
                 m_timeoutList[0] = 300;
                 m_timeoutList[1] = 300;
                 m_timeoutList[2] = 700;
-
+                //随机从前面两个网站中的一个下载,因为前面两个网站速度快些
                 downwebpos = (downwebpos + 1) % 2;
                 //res = DownLoadFileToSaveByte(m_strURLList[downwebpos]);
 
+                //随机打乱三个网址顺序下载,防止从一个网站下载过多被封
                 res = DownLoadFileToSaveByte(m_strURLList[downwebpos], m_timeoutList[downwebpos]);
                 if (res == null)
                 {
@@ -129,15 +130,15 @@ namespace H31DHTMgr
                     }
                 }
 
-                //string pathname1 = pathname +"\\"+ hashname.Substring(hashname.Length - 1, 1);
-                //if (!Directory.Exists(pathname1))
-                //{
-                //    Directory.CreateDirectory(pathname1);
-                //}
+                //检测子文件夹是否存在
+                string pathname1 = pathname + "\\" + hashname.Substring(hashname.Length - 1, 1);
+                if (!Directory.Exists(pathname1))
+                {
+                    Directory.CreateDirectory(pathname1);
+                }
                 string filename = string.Format("{0}//{1}//{2}.torrent", pathname, hashname.Substring(hashname.Length - 1, 1), hashname);
                 if (File.Exists(filename))
                     return 1;
-
                 m_strURLList[2] = string.Format("https://zoink.it/torrent/{0}.torrent", hashname);
                 m_strURLList[1] = string.Format("http://bt.box.n0808.com/{0}/{1}/{2}.torrent", hashname.Substring(0,2), hashname.Substring(hashname.Length-2,2), hashname);
                 m_strURLList[0] = string.Format("http://torrage.com/torrent/{0}.torrent", hashname);
@@ -145,12 +146,14 @@ namespace H31DHTMgr
                 m_timeoutList[1] = 500;
                 m_timeoutList[2] = 1000;
  
+                //随机从一个网址下载
                 //downwebpos = (downwebpos + 1) % 2;
                 //if (DownLoadFileToSaveFile(m_strURLList[downwebpos], filename) == 1)
                 //    return 1;
 
-
+                //随机打乱三个网址顺序下载,防止从一个网站下载过多被封
                 downwebpos = (downwebpos + 1);
+                //从三种网址一一测试下载
                 if (DownLoadFileToSaveFile(m_strURLList[(downwebpos) % 3], filename, m_timeoutList[(downwebpos) % 3]) == 1)
                     return 1;
                 if (DownLoadFileToSaveFile(m_strURLList[(downwebpos + 1) % 3], filename, m_timeoutList[(downwebpos + 1) % 3]) == 1)
@@ -159,8 +162,6 @@ namespace H31DHTMgr
                 if (DownLoadFileToSaveFile(m_strURLList[(downwebpos + 2) % 3], filename, m_timeoutList[(downwebpos + 2) % 3]) == 1)
                     return 1;
 
-                //if (DownLoadFileToSaveFile(strURLList[0], filename) == 1)
-                //    return 1;
                 return 0;
             }
             catch (Exception e)
