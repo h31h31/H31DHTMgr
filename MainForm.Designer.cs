@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ButtonSearch = new System.Windows.Forms.Button();
             this.Button_NEXTPAGE = new System.Windows.Forms.Button();
             this.ButtonStart = new System.Windows.Forms.Button();
@@ -43,6 +43,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.Button_About = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox_Lanague = new System.Windows.Forms.ComboBox();
             this.comboBox_OrderBy = new System.Windows.Forms.ComboBox();
             this.comboBox_Type = new System.Windows.Forms.ComboBox();
             this.textBox_SearchIndex = new System.Windows.Forms.TextBox();
@@ -51,7 +52,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBox_Torrent = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.comboBox_Lanague = new System.Windows.Forms.ComboBox();
+            this.Button_Copy = new System.Windows.Forms.Button();
+            this.Button_DownBT = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.m_data)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -72,7 +74,7 @@
             // 
             // Button_NEXTPAGE
             // 
-            this.Button_NEXTPAGE.Location = new System.Drawing.Point(478, 12);
+            this.Button_NEXTPAGE.Location = new System.Drawing.Point(468, 12);
             this.Button_NEXTPAGE.Name = "Button_NEXTPAGE";
             this.Button_NEXTPAGE.Size = new System.Drawing.Size(52, 23);
             this.Button_NEXTPAGE.TabIndex = 1;
@@ -82,7 +84,7 @@
             // 
             // ButtonStart
             // 
-            this.ButtonStart.Location = new System.Drawing.Point(126, 12);
+            this.ButtonStart.Location = new System.Drawing.Point(117, 13);
             this.ButtonStart.Name = "ButtonStart";
             this.ButtonStart.Size = new System.Drawing.Size(57, 23);
             this.ButtonStart.TabIndex = 2;
@@ -93,7 +95,7 @@
             // MainStatusText
             // 
             this.MainStatusText.AutoSize = true;
-            this.MainStatusText.Location = new System.Drawing.Point(772, 18);
+            this.MainStatusText.Location = new System.Drawing.Point(881, 16);
             this.MainStatusText.Name = "MainStatusText";
             this.MainStatusText.Size = new System.Drawing.Size(65, 12);
             this.MainStatusText.TabIndex = 6;
@@ -118,14 +120,14 @@
             this.m_data.AllowUserToDeleteRows = false;
             this.m_data.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.m_data.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.m_data.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.m_data.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.m_data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.m_data.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_data.Location = new System.Drawing.Point(3, 50);
@@ -204,6 +206,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.Button_DownBT);
+            this.groupBox2.Controls.Add(this.Button_Copy);
             this.groupBox2.Controls.Add(this.comboBox_Lanague);
             this.groupBox2.Controls.Add(this.comboBox_OrderBy);
             this.groupBox2.Controls.Add(this.comboBox_Type);
@@ -212,12 +216,23 @@
             this.groupBox2.Controls.Add(this.textBox_Search);
             this.groupBox2.Controls.Add(this.ButtonSearch);
             this.groupBox2.Controls.Add(this.Button_NEXTPAGE);
-            this.groupBox2.Location = new System.Drawing.Point(222, 1);
+            this.groupBox2.Location = new System.Drawing.Point(181, 1);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(544, 40);
+            this.groupBox2.Size = new System.Drawing.Size(694, 40);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "搜索";
+            // 
+            // comboBox_Lanague
+            // 
+            this.comboBox_Lanague.FormattingEnabled = true;
+            this.comboBox_Lanague.Items.AddRange(new object[] {
+            "日韩等语",
+            "中英文"});
+            this.comboBox_Lanague.Location = new System.Drawing.Point(239, 14);
+            this.comboBox_Lanague.Name = "comboBox_Lanague";
+            this.comboBox_Lanague.Size = new System.Drawing.Size(72, 20);
+            this.comboBox_Lanague.TabIndex = 12;
             // 
             // comboBox_OrderBy
             // 
@@ -256,7 +271,7 @@
             // 
             // Button_PrePAGE
             // 
-            this.Button_PrePAGE.Location = new System.Drawing.Point(419, 12);
+            this.Button_PrePAGE.Location = new System.Drawing.Point(413, 12);
             this.Button_PrePAGE.Name = "Button_PrePAGE";
             this.Button_PrePAGE.Size = new System.Drawing.Size(53, 23);
             this.Button_PrePAGE.TabIndex = 9;
@@ -276,9 +291,9 @@
             // 
             this.groupBox3.Controls.Add(this.checkBox_Torrent);
             this.groupBox3.Controls.Add(this.ButtonStart);
-            this.groupBox3.Location = new System.Drawing.Point(12, 0);
+            this.groupBox3.Location = new System.Drawing.Point(2, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(193, 41);
+            this.groupBox3.Size = new System.Drawing.Size(176, 41);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "监控数据";
@@ -288,23 +303,32 @@
             this.checkBox_Torrent.AutoSize = true;
             this.checkBox_Torrent.Checked = true;
             this.checkBox_Torrent.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_Torrent.Location = new System.Drawing.Point(6, 18);
+            this.checkBox_Torrent.Location = new System.Drawing.Point(5, 18);
             this.checkBox_Torrent.Name = "checkBox_Torrent";
             this.checkBox_Torrent.Size = new System.Drawing.Size(114, 16);
             this.checkBox_Torrent.TabIndex = 3;
             this.checkBox_Torrent.Text = "保留Torrent文件";
             this.checkBox_Torrent.UseVisualStyleBackColor = true;
             // 
-            // comboBox_Lanague
+            // Button_Copy
             // 
-            this.comboBox_Lanague.FormattingEnabled = true;
-            this.comboBox_Lanague.Items.AddRange(new object[] {
-            "日韩等语",
-            "中英文"});
-            this.comboBox_Lanague.Location = new System.Drawing.Point(239, 14);
-            this.comboBox_Lanague.Name = "comboBox_Lanague";
-            this.comboBox_Lanague.Size = new System.Drawing.Size(72, 20);
-            this.comboBox_Lanague.TabIndex = 12;
+            this.Button_Copy.Location = new System.Drawing.Point(526, 12);
+            this.Button_Copy.Name = "Button_Copy";
+            this.Button_Copy.Size = new System.Drawing.Size(75, 23);
+            this.Button_Copy.TabIndex = 13;
+            this.Button_Copy.Text = "复制磁链接";
+            this.Button_Copy.UseVisualStyleBackColor = true;
+            this.Button_Copy.Click += new System.EventHandler(this.Button_Copy_Click);
+            // 
+            // Button_DownBT
+            // 
+            this.Button_DownBT.Location = new System.Drawing.Point(607, 12);
+            this.Button_DownBT.Name = "Button_DownBT";
+            this.Button_DownBT.Size = new System.Drawing.Size(75, 23);
+            this.Button_DownBT.TabIndex = 14;
+            this.Button_DownBT.Text = "下载选中";
+            this.Button_DownBT.UseVisualStyleBackColor = true;
+            this.Button_DownBT.Click += new System.EventHandler(this.Button_DownBT_Click);
             // 
             // MainForm
             // 
@@ -353,6 +377,8 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button Button_About;
         private System.Windows.Forms.ComboBox comboBox_Lanague;
+        private System.Windows.Forms.Button Button_DownBT;
+        private System.Windows.Forms.Button Button_Copy;
     }
 }
 
