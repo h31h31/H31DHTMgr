@@ -160,7 +160,7 @@ namespace H31SQLLibrary
             try
             {
                 StringBuilder strSql = new StringBuilder();
-                string tempstr1 = string.Format("select Detail from H31_DHT_TYPE_{0}_{1} where hashKey='{1}'", hashtype*100+1,isHanzhi, hashname);
+                string tempstr1 = string.Format("select Detail from H31_DHT_TYPE_{0}_{1} where hashKey='{2}'", hashtype*100+1,isHanzhi, hashname);
                 object countid = dbsql.ExecuteScalar(CommandType.Text, tempstr1.ToString(), null);
                 if (countid == null)
                     return 0;
@@ -182,7 +182,7 @@ namespace H31SQLLibrary
             try
             {
                 StringBuilder strSql = new StringBuilder();
-                string tempstr = string.Format("update H31_DHT_TYPE_{0}_{1}  set recvTimes=recvTimes+1 where hashKey='{1}'", thetype*100+1,isHanzhi, thehash.hashKey);
+                string tempstr = string.Format("update H31_DHT_TYPE_{0}_{1}  set recvTimes=recvTimes+1 where hashKey='{2}'", thetype*100+1,isHanzhi, thehash.hashKey);
                 strSql.Append(tempstr);
                 return dbsql.ExecuteNonQuery(CommandType.Text, strSql.ToString(), null);
             }

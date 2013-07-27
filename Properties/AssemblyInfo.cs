@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("H31DHTMgr")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("DHT磁链接程序管理程序")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("H31H31@163.com")]
 [assembly: AssemblyProduct("H31DHTMgr")]
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      内部版本号
 //      修订号
 //
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.1")]
+[assembly: AssemblyFileVersion("1.0.0.1")]

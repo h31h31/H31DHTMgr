@@ -14,8 +14,8 @@ namespace H31DHTMgr
         private string pathname=string.Empty;
         public bool webgood = true;
         private int downwebpos = 0;
-        private string[] m_strURLList = new string[3];
-        private int[] m_timeoutList=new int[3];
+        private string[] m_strURLList = new string[4];
+        private int[] m_timeoutList=new int[4];
 
         #region 下载到内存中直接使用
         public byte[] DownLoadFileByHashToByte(string hashname)
@@ -39,10 +39,13 @@ namespace H31DHTMgr
                 m_strURLList[0] = string.Format("https://zoink.it/torrent/{0}.torrent", hashname);
                 m_strURLList[1] = string.Format("http://bt.box.n0808.com/{0}/{1}/{2}.torrent", hashname.Substring(0, 2), hashname.Substring(hashname.Length - 2, 2), hashname);
                 m_strURLList[2] = string.Format("http://torrage.com/torrent/{0}.torrent", hashname);
+                m_strURLList[3] = string.Format("http://torcache.net/torrent/{0}.torrent", hashname);
+            
 
                 m_timeoutList[0] = 300;
                 m_timeoutList[1] = 300;
                 m_timeoutList[2] = 700;
+                m_timeoutList[3] = 700;
                 //随机从前面两个网站中的一个下载,因为前面两个网站速度快些
                 downwebpos = (downwebpos + 1) % 2;
                 //res = DownLoadFileToSaveByte(m_strURLList[downwebpos]);
@@ -139,6 +142,7 @@ namespace H31DHTMgr
                 string filename = string.Format("{0}//{1}//{2}.torrent", pathname, hashname.Substring(hashname.Length - 1, 1), hashname);
                 if (File.Exists(filename))
                     return 1;
+                m_strURLList[3] = string.Format("http://torcache.net/torrent/{0}.torrent", hashname);
                 m_strURLList[2] = string.Format("https://zoink.it/torrent/{0}.torrent", hashname);
                 m_strURLList[1] = string.Format("http://bt.box.n0808.com/{0}/{1}/{2}.torrent", hashname.Substring(0,2), hashname.Substring(hashname.Length-2,2), hashname);
                 m_strURLList[0] = string.Format("http://torrage.com/torrent/{0}.torrent", hashname);
