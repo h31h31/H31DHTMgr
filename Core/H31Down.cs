@@ -139,7 +139,7 @@ namespace H31DHTMgr
                 {
                     Directory.CreateDirectory(pathname1);
                 }
-                string filename = string.Format("{0}//{1}//{2}.torrent", pathname, hashname.Substring(hashname.Length - 1, 1), hashname);
+                string filename = string.Format("{0}\\{1}\\{2}.torrent", pathname, hashname.Substring(hashname.Length - 1, 1), hashname);
                 if (File.Exists(filename))
                     return 1;
                 m_strURLList[3] = string.Format("http://torcache.net/torrent/{0}.torrent", hashname);
