@@ -89,14 +89,13 @@ namespace H31DHTMgr
 
                     using (MemoryStream memoryStream = new MemoryStream())
                     {
-                        responseStream.ReadTimeout = timeout1*2;
+                        //responseStream.ReadTimeout = timeout1*2;
                         int count = 0;
                         do
                         {
                             count = responseStream.Read(buffer, 0, buffer.Length);
                             memoryStream.Write(buffer, 0, count);
                             readsize += count;
-                            Thread.Sleep(1);
                         } while (count != 0);
                         ticktime2 = System.Environment.TickCount;
 
@@ -149,6 +148,7 @@ namespace H31DHTMgr
                 m_timeoutList[0] = 500;
                 m_timeoutList[1] = 500;
                 m_timeoutList[2] = 1000;
+                m_timeoutList[3] = 1000;
  
                 //随机从一个网址下载
                 //downwebpos = (downwebpos + 1) % 2;
@@ -158,12 +158,14 @@ namespace H31DHTMgr
                 //随机打乱三个网址顺序下载,防止从一个网站下载过多被封
                 downwebpos = (downwebpos + 1);
                 //从三种网址一一测试下载
-                if (DownLoadFileToSaveFile(m_strURLList[(downwebpos) % 3], filename, m_timeoutList[(downwebpos) % 3]) == 1)
+                if (DownLoadFileToSaveFile(m_strURLList[(downwebpos) % 4], filename, m_timeoutList[(downwebpos) % 4]) == 1)
                     return 1;
-                if (DownLoadFileToSaveFile(m_strURLList[(downwebpos + 1) % 3], filename, m_timeoutList[(downwebpos + 1) % 3]) == 1)
+                if (DownLoadFileToSaveFile(m_strURLList[(downwebpos + 1) % 4], filename, m_timeoutList[(downwebpos + 1) % 4]) == 1)
                     return 1;
 
-                if (DownLoadFileToSaveFile(m_strURLList[(downwebpos + 2) % 3], filename, m_timeoutList[(downwebpos + 2) % 3]) == 1)
+                if (DownLoadFileToSaveFile(m_strURLList[(downwebpos + 2) % 4], filename, m_timeoutList[(downwebpos + 2) % 4]) == 1)
+                    return 1;
+                if (DownLoadFileToSaveFile(m_strURLList[(downwebpos + 3) % 4], filename, m_timeoutList[(downwebpos + 3) % 4]) == 1)
                     return 1;
 
                 return 0;
@@ -193,14 +195,13 @@ namespace H31DHTMgr
 
                     using (MemoryStream memoryStream = new MemoryStream())
                     {
-                        responseStream.ReadTimeout = timeout1*2;
+                        //responseStream.ReadTimeout = timeout1*2;
                         int count = 0;
                         do
                         {
                             count = responseStream.Read(buffer, 0, buffer.Length);
                             memoryStream.Write(buffer, 0, count);
                             readsize += count;
-                            Thread.Sleep(1);
                         } while (count != 0);
                         ticktime2 = System.Environment.TickCount;
 
@@ -216,11 +217,22 @@ namespace H31DHTMgr
                 }
                 return 1;
             }
-            catch (Exception e)
+            catch (WebException e)
             {
                 Int32 ticktime3 = System.Environment.TickCount;
-                //H31Debug.PrintLn("下载失败" + strURL + ":" +  (ticktime3 - ticktime1).ToString());
-                return -2;
+                if (e.Status == WebExceptionStatus.Timeout)//文件超时
+                {
+                    return -2;
+                }
+                else if (e.Status == WebExceptionStatus.ProtocolError)//文件不存在
+                {
+                    return -3;
+                }
+                else
+                {
+                    H31Debug.PrintLn("下载失败" + strURL + ":" + (ticktime3 - ticktime1).ToString() + e.Status.ToString() + e.Message);
+                    return -4;
+                }
             }
         }
         #endregion
