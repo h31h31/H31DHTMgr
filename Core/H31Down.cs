@@ -124,21 +124,27 @@ namespace H31DHTMgr
             {
                 if (pathname == string.Empty)
                 {
-                    string localfile = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-                    pathname = localfile.Replace("file:\\", "") + "\\Torrent";
+                    string localfile = AppDomain.CurrentDomain.BaseDirectory;
+                    pathname = Path.Combine(localfile, "Torrent");
                     if (!Directory.Exists(pathname))
                     {
                         Directory.CreateDirectory(pathname);
+                        string tmpFolder = Path.Combine(pathname, "BAD");
+                        if (!Directory.Exists(tmpFolder))
+                        {
+                            Directory.CreateDirectory(tmpFolder);
+                        }
+
                     }
                 }
 
                 //检测子文件夹是否存在
-                string pathname1 = pathname + "\\" + hashname.Substring(hashname.Length - 1, 1);
+                string pathname1 = Path.Combine(pathname ,hashname.Substring(hashname.Length - 2, 2));
                 if (!Directory.Exists(pathname1))
                 {
                     Directory.CreateDirectory(pathname1);
                 }
-                string filename = string.Format("{0}\\{1}\\{2}.torrent", pathname, hashname.Substring(hashname.Length - 1, 1), hashname);
+                string filename = string.Format("{0}\\{1}\\{2}.torrent", pathname, hashname.Substring(hashname.Length - 2, 2), hashname);
                 if (File.Exists(filename))
                     return 1;
                 m_strURLList[3] = string.Format("http://torcache.net/torrent/{0}.torrent", hashname);
@@ -195,7 +201,6 @@ namespace H31DHTMgr
 
                     using (MemoryStream memoryStream = new MemoryStream())
                     {
-                        //responseStream.ReadTimeout = timeout1*2;
                         int count = 0;
                         do
                         {
