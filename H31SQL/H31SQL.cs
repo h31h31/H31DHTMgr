@@ -329,11 +329,11 @@ namespace H31SQLLibrary
          ///<summary>
          ///取得种子文件里面的信息
          ///</summary>
-        public static DataSet GetHashFileDetail(int tableid,int hashid)
+        public static DataSet GetHashFileDetail(int tableid,int hashid,int typeid)
         {
             try
             {
-                string strSql = string.Format("select * from H31_DHT_DETAIL_{0} where hashID={1} order by id", tableid, hashid);
+                string strSql = string.Format("select * from H31_DHT_DETAIL_{0} where hashID={1} and hashtype={2} order by id", tableid, hashid, typeid);
                 DataSet ds = dbsql.ExecuteQuery(CommandType.Text, strSql.ToString(), null);
                 return ds;
             }
